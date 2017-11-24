@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.groupBoxEnDecSteps = new System.Windows.Forms.GroupBox();
+            this.radioButtonDecoding = new System.Windows.Forms.RadioButton();
             this.radioButtonEncoding = new System.Windows.Forms.RadioButton();
             this.groupBoxStep2 = new System.Windows.Forms.GroupBox();
+            this.buttonEncodeDecode = new System.Windows.Forms.Button();
             this.groupBoxStep1 = new System.Windows.Forms.GroupBox();
-            this.radioButtonDecoding = new System.Windows.Forms.RadioButton();
+            this.textBoxImagePath = new System.Windows.Forms.TextBox();
+            this.buttonBrowse = new System.Windows.Forms.Button();
             this.richTextBoxTextData = new System.Windows.Forms.RichTextBox();
             this.labelMessageState = new System.Windows.Forms.Label();
             this.labelLoadedImage = new System.Windows.Forms.Label();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
-            this.buttonBrowse = new System.Windows.Forms.Button();
-            this.textBoxImagePath = new System.Windows.Forms.TextBox();
-            this.buttonEncodeDecode = new System.Windows.Forms.Button();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
@@ -60,6 +60,17 @@
             this.groupBoxEnDecSteps.Size = new System.Drawing.Size(339, 187);
             this.groupBoxEnDecSteps.TabIndex = 0;
             this.groupBoxEnDecSteps.TabStop = false;
+            // 
+            // radioButtonDecoding
+            // 
+            this.radioButtonDecoding.AutoSize = true;
+            this.radioButtonDecoding.Location = new System.Drawing.Point(107, 17);
+            this.radioButtonDecoding.Name = "radioButtonDecoding";
+            this.radioButtonDecoding.Size = new System.Drawing.Size(71, 17);
+            this.radioButtonDecoding.TabIndex = 2;
+            this.radioButtonDecoding.TabStop = true;
+            this.radioButtonDecoding.Text = "Decoding";
+            this.radioButtonDecoding.UseVisualStyleBackColor = true;
             // 
             // radioButtonEncoding
             // 
@@ -82,6 +93,15 @@
             this.groupBoxStep2.TabStop = false;
             this.groupBoxStep2.Text = "Step 2:";
             // 
+            // buttonEncodeDecode
+            // 
+            this.buttonEncodeDecode.Location = new System.Drawing.Point(10, 29);
+            this.buttonEncodeDecode.Name = "buttonEncodeDecode";
+            this.buttonEncodeDecode.Size = new System.Drawing.Size(57, 23);
+            this.buttonEncodeDecode.TabIndex = 0;
+            this.buttonEncodeDecode.Text = "Encode";
+            this.buttonEncodeDecode.UseVisualStyleBackColor = true;
+            // 
             // groupBoxStep1
             // 
             this.groupBoxStep1.Controls.Add(this.textBoxImagePath);
@@ -93,16 +113,21 @@
             this.groupBoxStep1.TabStop = false;
             this.groupBoxStep1.Text = "Step 1:";
             // 
-            // radioButtonDecoding
+            // textBoxImagePath
             // 
-            this.radioButtonDecoding.AutoSize = true;
-            this.radioButtonDecoding.Location = new System.Drawing.Point(107, 17);
-            this.radioButtonDecoding.Name = "radioButtonDecoding";
-            this.radioButtonDecoding.Size = new System.Drawing.Size(71, 17);
-            this.radioButtonDecoding.TabIndex = 2;
-            this.radioButtonDecoding.TabStop = true;
-            this.radioButtonDecoding.Text = "Decoding";
-            this.radioButtonDecoding.UseVisualStyleBackColor = true;
+            this.textBoxImagePath.Location = new System.Drawing.Point(74, 25);
+            this.textBoxImagePath.Name = "textBoxImagePath";
+            this.textBoxImagePath.Size = new System.Drawing.Size(243, 20);
+            this.textBoxImagePath.TabIndex = 1;
+            // 
+            // buttonBrowse
+            // 
+            this.buttonBrowse.Location = new System.Drawing.Point(10, 23);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(57, 23);
+            this.buttonBrowse.TabIndex = 0;
+            this.buttonBrowse.Text = "Browse";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
             // 
             // richTextBoxTextData
             // 
@@ -123,12 +148,13 @@
             // 
             // labelLoadedImage
             // 
-            this.labelLoadedImage.AutoSize = true;
             this.labelLoadedImage.Location = new System.Drawing.Point(386, 20);
             this.labelLoadedImage.Name = "labelLoadedImage";
-            this.labelLoadedImage.Size = new System.Drawing.Size(80, 13);
+            this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
             this.labelLoadedImage.TabIndex = 4;
             this.labelLoadedImage.Text = "Loaded image: ";
+            this.labelLoadedImage.AutoEllipsis = true;
+
             // 
             // pictureBoxImage
             // 
@@ -146,6 +172,7 @@
             this.buttonExit.TabIndex = 6;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonHelp
             // 
@@ -155,31 +182,7 @@
             this.buttonHelp.TabIndex = 7;
             this.buttonHelp.Text = "Help";
             this.buttonHelp.UseVisualStyleBackColor = true;
-            // 
-            // buttonBrowse
-            // 
-            this.buttonBrowse.Location = new System.Drawing.Point(10, 23);
-            this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(57, 23);
-            this.buttonBrowse.TabIndex = 0;
-            this.buttonBrowse.Text = "Browse";
-            this.buttonBrowse.UseVisualStyleBackColor = true;
-            // 
-            // textBoxImagePath
-            // 
-            this.textBoxImagePath.Location = new System.Drawing.Point(74, 25);
-            this.textBoxImagePath.Name = "textBoxImagePath";
-            this.textBoxImagePath.Size = new System.Drawing.Size(243, 20);
-            this.textBoxImagePath.TabIndex = 1;
-            // 
-            // buttonEncodeDecode
-            // 
-            this.buttonEncodeDecode.Location = new System.Drawing.Point(10, 29);
-            this.buttonEncodeDecode.Name = "buttonEncodeDecode";
-            this.buttonEncodeDecode.Size = new System.Drawing.Size(57, 23);
-            this.buttonEncodeDecode.TabIndex = 0;
-            this.buttonEncodeDecode.Text = "Encode";
-            this.buttonEncodeDecode.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
             // 
             // buttonAbout
             // 
@@ -189,8 +192,9 @@
             this.buttonAbout.TabIndex = 8;
             this.buttonAbout.Text = "About";
             this.buttonAbout.UseVisualStyleBackColor = true;
+            this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
             // 
-            // Form1
+            // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -203,7 +207,7 @@
             this.Controls.Add(this.labelMessageState);
             this.Controls.Add(this.richTextBoxTextData);
             this.Controls.Add(this.groupBoxEnDecSteps);
-            this.Name = "Form1";
+            this.Name = "UserForm";
             this.Text = "Text Encryption by Image Steganography";
             this.groupBoxEnDecSteps.ResumeLayout(false);
             this.groupBoxEnDecSteps.PerformLayout();
