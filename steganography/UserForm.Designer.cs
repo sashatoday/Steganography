@@ -71,10 +71,12 @@
             this.radioButtonDecoding.TabStop = true;
             this.radioButtonDecoding.Text = "Decoding";
             this.radioButtonDecoding.UseVisualStyleBackColor = true;
+            this.radioButtonDecoding.CheckedChanged += new System.EventHandler(this.radioButtonDecoding_CheckedChanged);
             // 
             // radioButtonEncoding
             // 
             this.radioButtonEncoding.AutoSize = true;
+            this.radioButtonEncoding.Checked = true;
             this.radioButtonEncoding.Location = new System.Drawing.Point(18, 17);
             this.radioButtonEncoding.Name = "radioButtonEncoding";
             this.radioButtonEncoding.Size = new System.Drawing.Size(70, 17);
@@ -82,6 +84,7 @@
             this.radioButtonEncoding.TabStop = true;
             this.radioButtonEncoding.Text = "Encoding";
             this.radioButtonEncoding.UseVisualStyleBackColor = true;
+            this.radioButtonEncoding.CheckedChanged += new System.EventHandler(this.radioButtonEncoding_CheckedChanged);
             // 
             // groupBoxStep2
             // 
@@ -91,7 +94,7 @@
             this.groupBoxStep2.Size = new System.Drawing.Size(327, 67);
             this.groupBoxStep2.TabIndex = 1;
             this.groupBoxStep2.TabStop = false;
-            this.groupBoxStep2.Text = "Step 2:";
+            this.groupBoxStep2.Text = "Step 2: Write secret message below and click \'Encode\'";
             // 
             // buttonEncodeDecode
             // 
@@ -111,7 +114,7 @@
             this.groupBoxStep1.Size = new System.Drawing.Size(327, 62);
             this.groupBoxStep1.TabIndex = 0;
             this.groupBoxStep1.TabStop = false;
-            this.groupBoxStep1.Text = "Step 1:";
+            this.groupBoxStep1.Text = "Step 1: Choose an Image";
             // 
             // textBoxImagePath
             // 
@@ -142,19 +145,18 @@
             this.labelMessageState.AutoSize = true;
             this.labelMessageState.Location = new System.Drawing.Point(28, 213);
             this.labelMessageState.Name = "labelMessageState";
-            this.labelMessageState.Size = new System.Drawing.Size(112, 13);
+            this.labelMessageState.Size = new System.Drawing.Size(86, 13);
             this.labelMessageState.TabIndex = 3;
-            this.labelMessageState.Text = "Write secret message:";
+            this.labelMessageState.Text = "Secret message:";
             // 
             // labelLoadedImage
             // 
+            this.labelLoadedImage.AutoEllipsis = true;
             this.labelLoadedImage.Location = new System.Drawing.Point(386, 20);
             this.labelLoadedImage.Name = "labelLoadedImage";
             this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
             this.labelLoadedImage.TabIndex = 4;
             this.labelLoadedImage.Text = "Loaded image: ";
-            this.labelLoadedImage.AutoEllipsis = true;
-
             // 
             // pictureBoxImage
             // 

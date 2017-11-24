@@ -11,10 +11,21 @@ namespace steganography
 {
     public partial class UserForm : Form
     {
+        enum OperationMode
+        {
+            Encoding,
+            Decoding
+        }
+        
+        private OperationMode currentMode;
+
         public UserForm()
         {
             InitializeComponent();
+            SetMode(OperationMode.Encoding);
         }
+
+        #region Help, About, Exit clicks
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
@@ -36,5 +47,33 @@ namespace steganography
             (helpForm = new HelpForm()).CreateControl();
             helpForm.ShowDialog();
         }
+
+        #endregion
+
+        private void SetMode(OperationMode mode)
+        {
+            currentMode = mode;
+            if (mode == OperationMode.Encoding)
+            {
+                buttonEncodeDecode.Text = "Encode";
+                groupBoxStep2.Text = "Write secret message below and click 'Encode'";
+            }
+            else
+            {
+                buttonEncodeDecode.Text = "Decode";
+                groupBoxStep2.Text = "Click 'Decode' and read secret message below";
+            }
+        }
+
+        private void radioButtonEncoding_CheckedChanged(object sender, EventArgs e)
+        {
+            SetMode(OperationMode.Encoding);
+        }
+
+        private void radioButtonDecoding_CheckedChanged(object sender, EventArgs e)
+        {
+            SetMode(OperationMode.Decoding);
+        }
+
     }
 }
