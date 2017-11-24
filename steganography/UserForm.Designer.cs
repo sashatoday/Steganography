@@ -98,12 +98,14 @@
             // 
             // buttonEncodeDecode
             // 
+            this.buttonEncodeDecode.Enabled = false;
             this.buttonEncodeDecode.Location = new System.Drawing.Point(10, 29);
             this.buttonEncodeDecode.Name = "buttonEncodeDecode";
             this.buttonEncodeDecode.Size = new System.Drawing.Size(57, 23);
             this.buttonEncodeDecode.TabIndex = 0;
             this.buttonEncodeDecode.Text = "Encode";
             this.buttonEncodeDecode.UseVisualStyleBackColor = true;
+            this.buttonEncodeDecode.Click += new System.EventHandler(this.buttonEncodeDecode_Click);
             // 
             // groupBoxStep1
             // 
@@ -131,6 +133,7 @@
             this.buttonBrowse.TabIndex = 0;
             this.buttonBrowse.Text = "Browse";
             this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
             // richTextBoxTextData
             // 
@@ -236,9 +239,9 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Button buttonEncodeDecode;
-        private System.Windows.Forms.TextBox textBoxImagePath;
         private System.Windows.Forms.Button buttonBrowse;
         private System.Windows.Forms.Button buttonAbout;
+        private System.Windows.Forms.TextBox textBoxImagePath;
     }
 }
 
