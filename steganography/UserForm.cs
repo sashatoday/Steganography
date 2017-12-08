@@ -29,7 +29,7 @@ namespace steganography
             SetMode(OperationMode.Encoding);
         }
 
-        #region Help, About, Exit events
+        #region Help, About, Exit, Reset events
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
@@ -50,6 +50,14 @@ namespace steganography
             HelpForm helpForm;
             (helpForm = new HelpForm()).CreateControl();
             helpForm.ShowDialog();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            richTextBoxTextData.Clear();
+            labelLoadedImage.Text = "No image";
+            textBoxImagePath.Clear();
+            pictureBoxImage.Dispose();
         }
 
         #endregion
@@ -88,7 +96,7 @@ namespace steganography
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-                Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF",
+                Filter = "Image Files(*.BMP;*.JPG;*PNG)|*.BMP;*.JPG;*PNG",
                 FilterIndex = 1,
                 RestoreDirectory = true
             };

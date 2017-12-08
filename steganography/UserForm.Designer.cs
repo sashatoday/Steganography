@@ -43,6 +43,7 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonAbout = new System.Windows.Forms.Button();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
             this.groupBoxStep1.SuspendLayout();
@@ -199,11 +200,22 @@
             this.buttonAbout.UseVisualStyleBackColor = true;
             this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
             // 
+            // buttonReset
+            // 
+            this.buttonReset.Location = new System.Drawing.Point(607, 419);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.TabIndex = 9;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 457);
+            this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonAbout);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.buttonExit);
@@ -242,6 +254,7 @@
         private System.Windows.Forms.Button buttonBrowse;
         private System.Windows.Forms.Button buttonAbout;
         private System.Windows.Forms.TextBox textBoxImagePath;
+        private System.Windows.Forms.Button buttonReset;
     }
 }
 
