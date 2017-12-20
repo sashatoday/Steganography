@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
             this.buttonOK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -48,10 +49,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(480, 13);
+            this.label1.Size = new System.Drawing.Size(251, 26);
             this.label1.TabIndex = 1;
-            this.label1.Text = "The application allows you to encrypt a message\n into an image and decrypt text fr" +
-    "om the image back";
+            this.label1.Text = "The application allows you to encrypt a message\n into an image and decrypt text f" +
+    "rom the image back";
             // 
             // HelpForm
             // 
@@ -60,6 +61,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonOK);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HelpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Help";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
             this.groupBoxEnDecSteps = new System.Windows.Forms.GroupBox();
             this.radioButtonDecoding = new System.Windows.Forms.RadioButton();
             this.radioButtonEncoding = new System.Windows.Forms.RadioButton();
@@ -160,7 +161,7 @@
             this.labelLoadedImage.Name = "labelLoadedImage";
             this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
             this.labelLoadedImage.TabIndex = 4;
-            this.labelLoadedImage.Text = "Loaded image: ";
+            this.labelLoadedImage.Text = "No image";
             // 
             // pictureBoxImage
             // 
@@ -224,6 +225,7 @@
             this.Controls.Add(this.labelMessageState);
             this.Controls.Add(this.richTextBoxTextData);
             this.Controls.Add(this.groupBoxEnDecSteps);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserForm";
             this.Text = "Text Encryption by Image Steganography";
             this.groupBoxEnDecSteps.ResumeLayout(false);
