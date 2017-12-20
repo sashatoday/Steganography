@@ -54,13 +54,16 @@ namespace steganography
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
+            buttonEncodeDecode.Enabled = false;
             richTextBoxTextData.Clear();
             labelLoadedImage.Text = "No image";
             textBoxImagePath.Clear();
-            pictureBoxImage.Dispose();
+            pictureBoxImage.Image = null;
         }
 
         #endregion
+
+        #region Mode events
 
         private void SetMode(OperationMode mode)
         {
@@ -77,8 +80,6 @@ namespace steganography
             }
         }
 
-        #region Mode events
-
         private void radioButtonEncoding_CheckedChanged(object sender, EventArgs e)
         {
             SetMode(OperationMode.Encoding);
@@ -90,6 +91,8 @@ namespace steganography
         }
 
         #endregion
+
+        #region Browse functions
 
         private string ChooseImageFile()
         {
@@ -122,6 +125,8 @@ namespace steganography
             return true;
         }
 
+        #endregion
+
         #region Encode/decode steps events
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -137,6 +142,7 @@ namespace steganography
         private void buttonEncodeDecode_Click(object sender, EventArgs e)
         {
             string imageFileName = textBoxImagePath.Text;
+            string textData = richTextBoxTextData.Text;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
                 MessageBox.Show(this, "Choose image file name!", "Error");
@@ -145,29 +151,34 @@ namespace steganography
             }
             if (currentMode == OperationMode.Encoding)
             {
-                encodedImage = ImageProcessing.EncodeTextToImage(richTextBoxTextData.Text,
-                                                                (Bitmap)originalImage.Clone());
+                if (string.IsNullOrWhiteSpace(textData))
+                {
+                    MessageBox.Show(this, "Write a secret message!", "Error");
+                    return;
+                }
+                encodedImage = ImageProcessing.EncodeTextToImage(textData, (Bitmap)originalImage.Clone());
+
+                var saveFileDialog = new SaveFileDialog
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                    Filter = @"Image Files(*.BMP;)|*.BMP",
+                    FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp"
+                };
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    encodedImage.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+                }
             }
             else
             {
-                
-            }
-            var saveFileDialog = new SaveFileDialog
-            {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-                Filter = @"Image Files(*.BMP;)|*.BMP",
-                FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp"
-            };
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                encodedImage.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+                richTextBoxTextData.Text = ImageProcessing.DecodeTextFromImage((Bitmap)originalImage.Clone());
             }
         }
 
         #endregion
     }
 
-    #region ImageProcessing
+    #region class ImageProcessing
 
     public static class ImageProcessing
     {
@@ -326,6 +337,54 @@ namespace steganography
             return imageBitmap;
         }
 
+        /// <summary>
+        /// Extracts hidden text from an image with encoded text in the pixels
+        /// 
+        /// The Algorithm for extracting the text is the reverse of the Encoding process.
+        /// For each pixel in the image, go over each byte of the pixel, take the LSB from the pixel's bytes and concatante them while keeping order: R, G, B.
+        /// Keep concatanating bits until the number of bits per text character has reached, and conver these N bits to a single char. Store this char in an array of chars (E.g string).
+        /// </summary>
+        /// <param name="imageBitmap">An image containing encoded text</param>
+        /// <returns>The hidden text from the image</returns>
+        public static string DecodeTextFromImage(Bitmap imageBitmap)
+        {
+            int numBitsPerChar = 8;
+            numBitsPerChar = 16;
+
+            string decodedText = string.Empty;
+            string decodedBinaryString = string.Empty;
+
+            //Go over each pixel in the image
+            for (int i = 0; i < imageBitmap.Height; i++)
+            {
+                for (int j = 0; j < imageBitmap.Width; j++)
+                {
+                    byte[] pixel = ByteArrayFromColor(imageBitmap.GetPixel(j, i));
+
+                    //For each pixel we need to read 3 bits from the text string and write to LSB of the pixels
+                    foreach (byte b in pixel)
+                    {
+                        if (decodedBinaryString.Length == numBitsPerChar) //Found a complete char
+                        {
+                            //Convert the collected bits to a char
+                            char decodedChar = Convert.ToChar(Convert.ToInt32(decodedBinaryString, 2));
+                            if (decodedChar == '\0')
+                            {
+                                //Found the trailing zeros that indicate end of text
+                                return decodedText; //no need to push this character (string does it itself)
+                            }
+                            //Append the newly found char to the resulting string
+                            decodedText += decodedChar;
+                            decodedBinaryString = string.Empty; //reset binary string
+                        }
+                        //Collect the LSB of the byte of the pixel
+                        decodedBinaryString += b & 0x1;
+                    }
+                }
+            }
+            //We might have read all the image without finding a trailing null termination char, so return whatever we found
+            return decodedText;
+        }
     }
 
     #endregion

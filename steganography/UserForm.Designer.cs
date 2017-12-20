@@ -165,7 +165,7 @@
             // 
             // pictureBoxImage
             // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(389, 40);
+            this.pictureBoxImage.Location = new System.Drawing.Point(389, 50);
             this.pictureBoxImage.Name = "pictureBoxImage";
             this.pictureBoxImage.Size = new System.Drawing.Size(583, 363);
             this.pictureBoxImage.TabIndex = 5;
@@ -227,6 +227,7 @@
             this.Controls.Add(this.groupBoxEnDecSteps);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text Encryption by Image Steganography";
             this.groupBoxEnDecSteps.ResumeLayout(false);
             this.groupBoxEnDecSteps.PerformLayout();
