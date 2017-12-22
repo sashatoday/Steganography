@@ -45,6 +45,13 @@
             this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.textBoxEncryptionKey = new System.Windows.Forms.TextBox();
+            this.labelEncryptionKey = new System.Windows.Forms.Label();
+            this.labelTextAlgorithm = new System.Windows.Forms.Label();
+            this.radioButtonAES = new System.Windows.Forms.RadioButton();
+            this.radioButton3DES = new System.Windows.Forms.RadioButton();
+            this.labelHashAlgorithm = new System.Windows.Forms.Label();
+            this.comboBoxHashAlgorithm = new System.Windows.Forms.ComboBox();
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
             this.groupBoxStep1.SuspendLayout();
@@ -96,7 +103,7 @@
             this.groupBoxStep2.Size = new System.Drawing.Size(327, 67);
             this.groupBoxStep2.TabIndex = 1;
             this.groupBoxStep2.TabStop = false;
-            this.groupBoxStep2.Text = "Step 2: Write secret message below and click \'Encode\'";
+            this.groupBoxStep2.Text = "Step 2: Write a secret message below and click \'Encode\'";
             // 
             // buttonEncodeDecode
             // 
@@ -118,7 +125,7 @@
             this.groupBoxStep1.Size = new System.Drawing.Size(327, 62);
             this.groupBoxStep1.TabIndex = 0;
             this.groupBoxStep1.TabStop = false;
-            this.groupBoxStep1.Text = "Step 1: Choose an Image";
+            this.groupBoxStep1.Text = "Step 1: Choose an image";
             // 
             // textBoxImagePath
             // 
@@ -167,13 +174,13 @@
             // 
             this.pictureBoxImage.Location = new System.Drawing.Point(389, 50);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(583, 363);
+            this.pictureBoxImage.Size = new System.Drawing.Size(583, 410);
             this.pictureBoxImage.TabIndex = 5;
             this.pictureBoxImage.TabStop = false;
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(897, 419);
+            this.buttonExit.Location = new System.Drawing.Point(897, 486);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 6;
@@ -183,7 +190,7 @@
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Location = new System.Drawing.Point(704, 419);
+            this.buttonHelp.Location = new System.Drawing.Point(704, 486);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(75, 23);
             this.buttonHelp.TabIndex = 7;
@@ -193,7 +200,7 @@
             // 
             // buttonAbout
             // 
-            this.buttonAbout.Location = new System.Drawing.Point(801, 419);
+            this.buttonAbout.Location = new System.Drawing.Point(801, 486);
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Size = new System.Drawing.Size(75, 23);
             this.buttonAbout.TabIndex = 8;
@@ -203,7 +210,7 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(607, 419);
+            this.buttonReset.Location = new System.Drawing.Point(607, 486);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 9;
@@ -211,11 +218,88 @@
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // textBoxEncryptionKey
+            // 
+            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 427);
+            this.textBoxEncryptionKey.Name = "textBoxEncryptionKey";
+            this.textBoxEncryptionKey.Size = new System.Drawing.Size(214, 20);
+            this.textBoxEncryptionKey.TabIndex = 10;
+            // 
+            // labelEncryptionKey
+            // 
+            this.labelEncryptionKey.AutoSize = true;
+            this.labelEncryptionKey.Location = new System.Drawing.Point(22, 430);
+            this.labelEncryptionKey.Name = "labelEncryptionKey";
+            this.labelEncryptionKey.Size = new System.Drawing.Size(122, 13);
+            this.labelEncryptionKey.TabIndex = 11;
+            this.labelEncryptionKey.Text = "Enter an encryption key:";
+            // 
+            // labelTextAlgorithm
+            // 
+            this.labelTextAlgorithm.AutoSize = true;
+            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 492);
+            this.labelTextAlgorithm.Name = "labelTextAlgorithm";
+            this.labelTextAlgorithm.Size = new System.Drawing.Size(182, 13);
+            this.labelTextAlgorithm.TabIndex = 12;
+            this.labelTextAlgorithm.Text = "Text encryption/decryption algorithm:";
+            // 
+            // radioButtonAES
+            // 
+            this.radioButtonAES.AutoSize = true;
+            this.radioButtonAES.Checked = true;
+            this.radioButtonAES.Location = new System.Drawing.Point(210, 490);
+            this.radioButtonAES.Name = "radioButtonAES";
+            this.radioButtonAES.Size = new System.Drawing.Size(46, 17);
+            this.radioButtonAES.TabIndex = 13;
+            this.radioButtonAES.TabStop = true;
+            this.radioButtonAES.Text = "AES";
+            this.radioButtonAES.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3DES
+            // 
+            this.radioButton3DES.AutoSize = true;
+            this.radioButton3DES.Location = new System.Drawing.Point(273, 490);
+            this.radioButton3DES.Name = "radioButton3DES";
+            this.radioButton3DES.Size = new System.Drawing.Size(53, 17);
+            this.radioButton3DES.TabIndex = 14;
+            this.radioButton3DES.Text = "3DES";
+            this.radioButton3DES.UseVisualStyleBackColor = true;
+            // 
+            // labelHashAlgorithm
+            // 
+            this.labelHashAlgorithm.AutoSize = true;
+            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 461);
+            this.labelHashAlgorithm.Name = "labelHashAlgorithm";
+            this.labelHashAlgorithm.Size = new System.Drawing.Size(77, 13);
+            this.labelHashAlgorithm.TabIndex = 15;
+            this.labelHashAlgorithm.Text = "Hash algorithm";
+            // 
+            // comboBoxHashAlgorithm
+            // 
+            this.comboBoxHashAlgorithm.FormattingEnabled = true;
+            this.comboBoxHashAlgorithm.Items.AddRange(new object[] {
+            "SHA-256",
+            "SHA-512",
+            "MD5"});
+            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 458);
+            this.comboBoxHashAlgorithm.Name = "comboBoxHashAlgorithm";
+            this.comboBoxHashAlgorithm.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxHashAlgorithm.TabIndex = 16;
+            this.comboBoxHashAlgorithm.Text = "SHA-256";
+            this.comboBoxHashAlgorithm.SelectedIndexChanged += new System.EventHandler(this.comboBoxHashAlgorithm_SelectedIndexChanged);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 457);
+            this.ClientSize = new System.Drawing.Size(984, 534);
+            this.Controls.Add(this.comboBoxHashAlgorithm);
+            this.Controls.Add(this.labelHashAlgorithm);
+            this.Controls.Add(this.radioButton3DES);
+            this.Controls.Add(this.radioButtonAES);
+            this.Controls.Add(this.labelTextAlgorithm);
+            this.Controls.Add(this.labelEncryptionKey);
+            this.Controls.Add(this.textBoxEncryptionKey);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonAbout);
             this.Controls.Add(this.buttonHelp);
@@ -258,6 +342,13 @@
         private System.Windows.Forms.Button buttonAbout;
         private System.Windows.Forms.TextBox textBoxImagePath;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.TextBox textBoxEncryptionKey;
+        private System.Windows.Forms.Label labelEncryptionKey;
+        private System.Windows.Forms.Label labelTextAlgorithm;
+        private System.Windows.Forms.RadioButton radioButtonAES;
+        private System.Windows.Forms.RadioButton radioButton3DES;
+        private System.Windows.Forms.Label labelHashAlgorithm;
+        private System.Windows.Forms.ComboBox comboBoxHashAlgorithm;
     }
 }
 
