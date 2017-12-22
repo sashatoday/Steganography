@@ -78,7 +78,7 @@ namespace steganography {
 
         private string chooseImageFile() {
             OpenFileDialog openFileDialog = new OpenFileDialog {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
                 FilterIndex = 1,
                 RestoreDirectory = true };
@@ -92,8 +92,8 @@ namespace steganography {
                 pictureBoxImage.Image =
                     ImageProcessing.ResizeImage(pictureBoxImage.Width, pictureBoxImage.Height, Image.FromFile(imageFileName));
             } catch (Exception exception) {
-                MessageBox.Show(
-                    "Failed to load image from file!" + Environment.NewLine + "Exception: " + exception.Message, 
+                MessageBox.Show("Failed to load image from file!" + Environment.NewLine +
+                    Environment.NewLine + "Exception: " + exception.Message, 
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -102,7 +102,7 @@ namespace steganography {
 
         private bool saveImage(string imageFileName) {
             var saveFileDialog = new SaveFileDialog {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
                 FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp" };
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
@@ -120,6 +120,23 @@ namespace steganography {
         private string decryptText(string text, string key) {
             if (radioButtonAES.Checked) return AES.Decrypt(text, key);
             else return TripleDES.Decrypt(text, key);
+        }
+
+        private string computeHashKey(string keyData) {
+            byte[] keyBytes = Encoding.ASCII.GetBytes(textBoxEncryptionKey.Text);
+            HashAlgorithm hashAlgorithm;
+            byte[] resultKey;
+            if (comboBoxHashAlgorithm.Text == "SHA-256") {
+                hashAlgorithm = new SHA256CryptoServiceProvider();
+                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+            } else if (comboBoxHashAlgorithm.Text == "SHA-512") {
+                hashAlgorithm = new SHA512CryptoServiceProvider();
+                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+            } else {
+                hashAlgorithm = new MD5CryptoServiceProvider();
+                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+            }
+            return encryptionKey = BitConverter.ToString(resultKey);
         }
 
         #endregion
@@ -145,13 +162,7 @@ namespace steganography {
                 return;
             }
 
-            ////////
-            HashAlgorithm MD5 = new MD5CryptoServiceProvider();
-            byte[] a = Encoding.ASCII.GetBytes(textBoxEncryptionKey.Text);
-            byte[] result = MD5.ComputeHash(a);
-            encryptionKey = BitConverter.ToString(result);
-
-            ////////
+            computeHashKey(textBoxEncryptionKey.Text);
 
             if (radioButtonEncoding.Checked) {
                 string textData = richTextBoxTextData.Text;
@@ -162,23 +173,26 @@ namespace steganography {
                 try {
                     encryptedData = encryptText(textData, encryptionKey);
                 } catch (Exception exception) {
-                    MessageBox.Show(
-                        "Failed to encrypt text!" + Environment.NewLine + "Exception: " + exception.Message,
+                    MessageBox.Show("Failed to encrypt text!" + Environment.NewLine +
+                        Environment.NewLine + "Exception: " + exception.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 try {
                     encodedImage = ImageProcessing.EncodeTextToImage(encryptedData, (Bitmap)originalImage.Clone());
                 } catch (Exception exception) {
-                    MessageBox.Show(
-                        "Failed to encode text to image!" + Environment.NewLine + "Exception: " + exception.Message,
+                    MessageBox.Show("Failed to encode text to image!" + Environment.NewLine +
+                        Environment.NewLine + "Exception: " + exception.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 try {
                     if (!saveImage(imageFileName)) return;
                 } catch {
-                    MessageBox.Show("Failed to save image!" + Environment.NewLine, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to save image!" + Environment.NewLine + Environment.NewLine +
+                        "You can not overwrite an image" + Environment.NewLine + 
+                        "that has already been opened in this program", 
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             } else {
@@ -186,16 +200,16 @@ namespace steganography {
                 try {
                     encryptedData = ImageProcessing.DecodeTextFromImage((Bitmap)originalImage.Clone());
                 } catch (Exception exception) {
-                    MessageBox.Show(
-                        "Failed to decode text from image!" + Environment.NewLine + "Exception: " + exception.Message,
+                    MessageBox.Show("Failed to decode text from image!" + Environment.NewLine + 
+                        Environment.NewLine + "Exception: " + exception.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 try {
                     richTextBoxTextData.Text = decryptText(encryptedData, encryptionKey);
                 } catch (Exception exception) {
-                    MessageBox.Show(
-                        "Failed to decrypt text!" + Environment.NewLine + "Exception: " + exception.Message,
+                    MessageBox.Show("Failed to decrypt text!" + Environment.NewLine +
+                        Environment.NewLine + "Exception: " + exception.Message, 
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -203,9 +217,5 @@ namespace steganography {
         }
 
         #endregion
-
-        private void comboBoxHashAlgorithm_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
     }
 }

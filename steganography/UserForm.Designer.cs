@@ -220,7 +220,7 @@
             // 
             // textBoxEncryptionKey
             // 
-            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 427);
+            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 457);
             this.textBoxEncryptionKey.Name = "textBoxEncryptionKey";
             this.textBoxEncryptionKey.Size = new System.Drawing.Size(214, 20);
             this.textBoxEncryptionKey.TabIndex = 10;
@@ -228,7 +228,7 @@
             // labelEncryptionKey
             // 
             this.labelEncryptionKey.AutoSize = true;
-            this.labelEncryptionKey.Location = new System.Drawing.Point(22, 430);
+            this.labelEncryptionKey.Location = new System.Drawing.Point(23, 460);
             this.labelEncryptionKey.Name = "labelEncryptionKey";
             this.labelEncryptionKey.Size = new System.Drawing.Size(122, 13);
             this.labelEncryptionKey.TabIndex = 11;
@@ -237,7 +237,7 @@
             // labelTextAlgorithm
             // 
             this.labelTextAlgorithm.AutoSize = true;
-            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 492);
+            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 428);
             this.labelTextAlgorithm.Name = "labelTextAlgorithm";
             this.labelTextAlgorithm.Size = new System.Drawing.Size(182, 13);
             this.labelTextAlgorithm.TabIndex = 12;
@@ -247,7 +247,7 @@
             // 
             this.radioButtonAES.AutoSize = true;
             this.radioButtonAES.Checked = true;
-            this.radioButtonAES.Location = new System.Drawing.Point(210, 490);
+            this.radioButtonAES.Location = new System.Drawing.Point(210, 426);
             this.radioButtonAES.Name = "radioButtonAES";
             this.radioButtonAES.Size = new System.Drawing.Size(46, 17);
             this.radioButtonAES.TabIndex = 13;
@@ -258,7 +258,7 @@
             // radioButton3DES
             // 
             this.radioButton3DES.AutoSize = true;
-            this.radioButton3DES.Location = new System.Drawing.Point(273, 490);
+            this.radioButton3DES.Location = new System.Drawing.Point(273, 426);
             this.radioButton3DES.Name = "radioButton3DES";
             this.radioButton3DES.Size = new System.Drawing.Size(53, 17);
             this.radioButton3DES.TabIndex = 14;
@@ -268,7 +268,7 @@
             // labelHashAlgorithm
             // 
             this.labelHashAlgorithm.AutoSize = true;
-            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 461);
+            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 491);
             this.labelHashAlgorithm.Name = "labelHashAlgorithm";
             this.labelHashAlgorithm.Size = new System.Drawing.Size(77, 13);
             this.labelHashAlgorithm.TabIndex = 15;
@@ -281,12 +281,11 @@
             "SHA-256",
             "SHA-512",
             "MD5"});
-            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 458);
+            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 488);
             this.comboBoxHashAlgorithm.Name = "comboBoxHashAlgorithm";
             this.comboBoxHashAlgorithm.Size = new System.Drawing.Size(121, 21);
             this.comboBoxHashAlgorithm.TabIndex = 16;
             this.comboBoxHashAlgorithm.Text = "SHA-256";
-            this.comboBoxHashAlgorithm.SelectedIndexChanged += new System.EventHandler(this.comboBoxHashAlgorithm_SelectedIndexChanged);
             // 
             // UserForm
             // 
