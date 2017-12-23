@@ -12,7 +12,7 @@ namespace steganography {
             Encoding,
             Decoding
         }
-        
+
         private Image originalImage;
         private Image encodedImage;
         string encryptionKey = "";
@@ -24,19 +24,17 @@ namespace steganography {
 
         #region Help, About, Exit, Reset events
 
-        private void buttonExit_Click(object sender, EventArgs e) {
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
 
-        private void buttonAbout_Click(object sender, EventArgs e) {
-            //MessageBox.Show("Author: Zhuravleva Aleksandra © 2017");
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
             AboutProgramForm aboutProgramForm;
             (aboutProgramForm = new AboutProgramForm()).CreateControl();
             aboutProgramForm.ShowDialog();
         }
 
-        private void buttonHelp_Click(object sender, EventArgs e) {
-            //MessageBox.Show("The application allows you to encrypt a message into an image and decrypt text from the image back");
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
             HelpForm helpForm;
             (helpForm = new HelpForm()).CreateControl();
             helpForm.ShowDialog();
@@ -47,6 +45,7 @@ namespace steganography {
             richTextBoxTextData.Clear();
             labelLoadedImage.Text = "No image";
             textBoxImagePath.Clear();
+            textBoxEncryptionKey.Clear();
             pictureBoxImage.Image = null;
         }
 
@@ -81,7 +80,8 @@ namespace steganography {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
                 FilterIndex = 1,
-                RestoreDirectory = true };
+                RestoreDirectory = true
+            };
             var result = openFileDialog.ShowDialog();
             return result == DialogResult.OK ? openFileDialog.FileName : null;
         }
@@ -93,7 +93,7 @@ namespace steganography {
                     ImageProcessing.ResizeImage(pictureBoxImage.Width, pictureBoxImage.Height, Image.FromFile(imageFileName));
             } catch (Exception exception) {
                 MessageBox.Show("Failed to load image from file!" + Environment.NewLine +
-                    Environment.NewLine + "Exception: " + exception.Message, 
+                    Environment.NewLine + "Exception: " + exception.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -104,12 +104,12 @@ namespace steganography {
             var saveFileDialog = new SaveFileDialog {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
-                FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp" };
+                FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp"
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 encodedImage.Save(saveFileDialog.FileName, ImageFormat.Bmp);
                 return true;
-            }
-            else return false;
+            } else return false;
         }
 
         private string encryptText(string text, string key) {
@@ -190,8 +190,8 @@ namespace steganography {
                     if (!saveImage(imageFileName)) return;
                 } catch {
                     MessageBox.Show("Failed to save image!" + Environment.NewLine + Environment.NewLine +
-                        "You can not overwrite an image" + Environment.NewLine + 
-                        "that has already been opened in this program", 
+                        "You can not overwrite an image" + Environment.NewLine +
+                        "that has already been opened in this program",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -200,7 +200,7 @@ namespace steganography {
                 try {
                     encryptedData = ImageProcessing.DecodeTextFromImage((Bitmap)originalImage.Clone());
                 } catch (Exception exception) {
-                    MessageBox.Show("Failed to decode text from image!" + Environment.NewLine + 
+                    MessageBox.Show("Failed to decode text from image!" + Environment.NewLine +
                         Environment.NewLine + "Exception: " + exception.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -209,7 +209,7 @@ namespace steganography {
                     richTextBoxTextData.Text = decryptText(encryptedData, encryptionKey);
                 } catch (Exception exception) {
                     MessageBox.Show("Failed to decrypt text!" + Environment.NewLine +
-                        Environment.NewLine + "Exception: " + exception.Message, 
+                        Environment.NewLine + "Exception: " + exception.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }

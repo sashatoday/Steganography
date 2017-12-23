@@ -40,10 +40,6 @@
             this.richTextBoxTextData = new System.Windows.Forms.RichTextBox();
             this.labelMessageState = new System.Windows.Forms.Label();
             this.labelLoadedImage = new System.Windows.Forms.Label();
-            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
-            this.buttonExit = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.buttonAbout = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.textBoxEncryptionKey = new System.Windows.Forms.TextBox();
             this.labelEncryptionKey = new System.Windows.Forms.Label();
@@ -52,9 +48,16 @@
             this.radioButton3DES = new System.Windows.Forms.RadioButton();
             this.labelHashAlgorithm = new System.Windows.Forms.Label();
             this.comboBoxHashAlgorithm = new System.Windows.Forms.ComboBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
             this.groupBoxStep1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +67,7 @@
             this.groupBoxEnDecSteps.Controls.Add(this.radioButtonEncoding);
             this.groupBoxEnDecSteps.Controls.Add(this.groupBoxStep2);
             this.groupBoxEnDecSteps.Controls.Add(this.groupBoxStep1);
-            this.groupBoxEnDecSteps.Location = new System.Drawing.Point(25, 11);
+            this.groupBoxEnDecSteps.Location = new System.Drawing.Point(25, 57);
             this.groupBoxEnDecSteps.Name = "groupBoxEnDecSteps";
             this.groupBoxEnDecSteps.Size = new System.Drawing.Size(339, 187);
             this.groupBoxEnDecSteps.TabIndex = 0;
@@ -146,7 +149,7 @@
             // 
             // richTextBoxTextData
             // 
-            this.richTextBoxTextData.Location = new System.Drawing.Point(25, 233);
+            this.richTextBoxTextData.Location = new System.Drawing.Point(25, 279);
             this.richTextBoxTextData.Name = "richTextBoxTextData";
             this.richTextBoxTextData.Size = new System.Drawing.Size(339, 170);
             this.richTextBoxTextData.TabIndex = 2;
@@ -155,7 +158,7 @@
             // labelMessageState
             // 
             this.labelMessageState.AutoSize = true;
-            this.labelMessageState.Location = new System.Drawing.Point(28, 213);
+            this.labelMessageState.Location = new System.Drawing.Point(28, 259);
             this.labelMessageState.Name = "labelMessageState";
             this.labelMessageState.Size = new System.Drawing.Size(86, 13);
             this.labelMessageState.TabIndex = 3;
@@ -164,53 +167,15 @@
             // labelLoadedImage
             // 
             this.labelLoadedImage.AutoEllipsis = true;
-            this.labelLoadedImage.Location = new System.Drawing.Point(386, 20);
+            this.labelLoadedImage.Location = new System.Drawing.Point(386, 66);
             this.labelLoadedImage.Name = "labelLoadedImage";
             this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
             this.labelLoadedImage.TabIndex = 4;
             this.labelLoadedImage.Text = "No image";
             // 
-            // pictureBoxImage
-            // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(389, 50);
-            this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(583, 410);
-            this.pictureBoxImage.TabIndex = 5;
-            this.pictureBoxImage.TabStop = false;
-            // 
-            // buttonExit
-            // 
-            this.buttonExit.Location = new System.Drawing.Point(897, 486);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(75, 23);
-            this.buttonExit.TabIndex = 6;
-            this.buttonExit.Text = "Exit";
-            this.buttonExit.UseVisualStyleBackColor = true;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Location = new System.Drawing.Point(704, 486);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(75, 23);
-            this.buttonHelp.TabIndex = 7;
-            this.buttonHelp.Text = "Help";
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            // 
-            // buttonAbout
-            // 
-            this.buttonAbout.Location = new System.Drawing.Point(801, 486);
-            this.buttonAbout.Name = "buttonAbout";
-            this.buttonAbout.Size = new System.Drawing.Size(75, 23);
-            this.buttonAbout.TabIndex = 8;
-            this.buttonAbout.Text = "About";
-            this.buttonAbout.UseVisualStyleBackColor = true;
-            this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
-            // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(607, 486);
+            this.buttonReset.Location = new System.Drawing.Point(25, 28);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 9;
@@ -220,7 +185,7 @@
             // 
             // textBoxEncryptionKey
             // 
-            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 457);
+            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 503);
             this.textBoxEncryptionKey.Name = "textBoxEncryptionKey";
             this.textBoxEncryptionKey.Size = new System.Drawing.Size(214, 20);
             this.textBoxEncryptionKey.TabIndex = 10;
@@ -228,7 +193,7 @@
             // labelEncryptionKey
             // 
             this.labelEncryptionKey.AutoSize = true;
-            this.labelEncryptionKey.Location = new System.Drawing.Point(23, 460);
+            this.labelEncryptionKey.Location = new System.Drawing.Point(23, 506);
             this.labelEncryptionKey.Name = "labelEncryptionKey";
             this.labelEncryptionKey.Size = new System.Drawing.Size(122, 13);
             this.labelEncryptionKey.TabIndex = 11;
@@ -237,7 +202,7 @@
             // labelTextAlgorithm
             // 
             this.labelTextAlgorithm.AutoSize = true;
-            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 428);
+            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 474);
             this.labelTextAlgorithm.Name = "labelTextAlgorithm";
             this.labelTextAlgorithm.Size = new System.Drawing.Size(182, 13);
             this.labelTextAlgorithm.TabIndex = 12;
@@ -247,7 +212,7 @@
             // 
             this.radioButtonAES.AutoSize = true;
             this.radioButtonAES.Checked = true;
-            this.radioButtonAES.Location = new System.Drawing.Point(210, 426);
+            this.radioButtonAES.Location = new System.Drawing.Point(210, 472);
             this.radioButtonAES.Name = "radioButtonAES";
             this.radioButtonAES.Size = new System.Drawing.Size(46, 17);
             this.radioButtonAES.TabIndex = 13;
@@ -258,7 +223,7 @@
             // radioButton3DES
             // 
             this.radioButton3DES.AutoSize = true;
-            this.radioButton3DES.Location = new System.Drawing.Point(273, 426);
+            this.radioButton3DES.Location = new System.Drawing.Point(273, 472);
             this.radioButton3DES.Name = "radioButton3DES";
             this.radioButton3DES.Size = new System.Drawing.Size(53, 17);
             this.radioButton3DES.TabIndex = 14;
@@ -268,7 +233,7 @@
             // labelHashAlgorithm
             // 
             this.labelHashAlgorithm.AutoSize = true;
-            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 491);
+            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 537);
             this.labelHashAlgorithm.Name = "labelHashAlgorithm";
             this.labelHashAlgorithm.Size = new System.Drawing.Size(77, 13);
             this.labelHashAlgorithm.TabIndex = 15;
@@ -281,17 +246,71 @@
             "SHA-256",
             "SHA-512",
             "MD5"});
-            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 488);
+            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 534);
             this.comboBoxHashAlgorithm.Name = "comboBoxHashAlgorithm";
             this.comboBoxHashAlgorithm.Size = new System.Drawing.Size(121, 21);
             this.comboBoxHashAlgorithm.TabIndex = 16;
             this.comboBoxHashAlgorithm.Text = "SHA-256";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(984, 26);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // pictureBoxImage
+            // 
+            this.pictureBoxImage.Location = new System.Drawing.Point(389, 96);
+            this.pictureBoxImage.Name = "pictureBoxImage";
+            this.pictureBoxImage.Size = new System.Drawing.Size(583, 410);
+            this.pictureBoxImage.TabIndex = 5;
+            this.pictureBoxImage.TabStop = false;
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.menuToolStripMenuItem.BackgroundImage = global::steganography.Properties.Resources.Без_названия;
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.menuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.menuToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Padding = new System.Windows.Forms.Padding(6, 0, 6, 3);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(54, 22);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 534);
+            this.ClientSize = new System.Drawing.Size(984, 576);
             this.Controls.Add(this.comboBoxHashAlgorithm);
             this.Controls.Add(this.labelHashAlgorithm);
             this.Controls.Add(this.radioButton3DES);
@@ -300,14 +319,12 @@
             this.Controls.Add(this.labelEncryptionKey);
             this.Controls.Add(this.textBoxEncryptionKey);
             this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonAbout);
-            this.Controls.Add(this.buttonHelp);
-            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.pictureBoxImage);
             this.Controls.Add(this.labelLoadedImage);
             this.Controls.Add(this.labelMessageState);
             this.Controls.Add(this.richTextBoxTextData);
             this.Controls.Add(this.groupBoxEnDecSteps);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -317,6 +334,8 @@
             this.groupBoxStep2.ResumeLayout(false);
             this.groupBoxStep1.ResumeLayout(false);
             this.groupBoxStep1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -334,11 +353,8 @@
         private System.Windows.Forms.Label labelMessageState;
         private System.Windows.Forms.Label labelLoadedImage;
         private System.Windows.Forms.PictureBox pictureBoxImage;
-        private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Button buttonEncodeDecode;
         private System.Windows.Forms.Button buttonBrowse;
-        private System.Windows.Forms.Button buttonAbout;
         private System.Windows.Forms.TextBox textBoxImagePath;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.TextBox textBoxEncryptionKey;
@@ -348,6 +364,11 @@
         private System.Windows.Forms.RadioButton radioButton3DES;
         private System.Windows.Forms.Label labelHashAlgorithm;
         private System.Windows.Forms.ComboBox comboBoxHashAlgorithm;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

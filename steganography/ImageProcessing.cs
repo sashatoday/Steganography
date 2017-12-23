@@ -3,18 +3,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 
-namespace steganography
-{
-    public static class ImageProcessing
-    {
-        public static Image ResizeImage(int newWidth, int newHeight, Image imgPhoto)
-        {
+namespace steganography {
+    public static class ImageProcessing {
+        public static Image ResizeImage(int newWidth, int newHeight, Image imgPhoto) {
             int sourceWidth = imgPhoto.Width;
             int sourceHeight = imgPhoto.Height;
 
             //Consider vertical pics
-            if (sourceWidth < sourceHeight)
-            {
+            if (sourceWidth < sourceHeight) {
                 int buff = newWidth;
 
                 newWidth = newHeight;
@@ -26,12 +22,10 @@ namespace steganography
 
             nPercentW = ((float)newWidth / (float)sourceWidth);
             nPercentH = ((float)newHeight / (float)sourceHeight);
-            if (nPercentH < nPercentW)
-            {
+            if (nPercentH < nPercentW) {
                 nPercent = nPercentH;
                 destX = System.Convert.ToInt16((newWidth - (sourceWidth * nPercent)) / 2);
-            }
-            else {
+            } else {
                 nPercent = nPercentW;
                 destY = System.Convert.ToInt16((newHeight - (sourceHeight * nPercent)) / 2);
             }
@@ -56,55 +50,44 @@ namespace steganography
             return bmPhoto;
         }
 
-        public static Color ColorFromByteArray(byte[] bytes)
-        {
+        public static Color ColorFromByteArray(byte[] bytes) {
             return Color.FromArgb(bytes[0], bytes[1], bytes[2]);
         }
 
-        private static byte[] ByteArrayFromColor(Color pixel)
-        {
+        private static byte[] ByteArrayFromColor(Color pixel) {
             return new[] { pixel.R, pixel.G, pixel.B };
         }
 
-        private static byte[] PixelToMaskedByteArray(Color pixel)
-        {
+        private static byte[] PixelToMaskedByteArray(Color pixel) {
             return ByteArrayFromColor(pixel).Select(b => (byte)(b & 0xFE)).ToArray();
         }
 
-        private static string CharToBinaryString(char c, int len)
-        {
+        private static string CharToBinaryString(char c, int len) {
             var bitsString = Convert.ToString(c, 2); //Converting the char with base-2 to a binary string
             return bitsString.PadLeft(len).Replace(' ', '0'); //Padding with up to len '0' bits on the left (with len=8: '110101' --> '00110101')
         }
 
-        public static Bitmap EncodeTextToImage(string text, Bitmap imageBitmap)
-        {
+        public static Bitmap EncodeTextToImage(string text, Bitmap imageBitmap) {
             int numBitsPerChar = 16;
 
             int charIndexInText = 0; //A pointer to the character (from the text string) that we are currently hiding 
             string currentCharFromTextBinaryString = CharToBinaryString(text[0], numBitsPerChar); //a binary-string that represents the bits of the charachter we are currently hiding
 
             //Go over each pixel in the image
-            for (int i = 0; i < imageBitmap.Height; i++)
-            {
-                for (int j = 0; j < imageBitmap.Width; j++)
-                {
+            for (int i = 0; i < imageBitmap.Height; i++) {
+                for (int j = 0; j < imageBitmap.Width; j++) {
                     //Clear the LSB for all bytes of the pixel
                     byte[] maskedPixel = PixelToMaskedByteArray(imageBitmap.GetPixel(j, i));
 
                     //For each pixel write 3 bits from the text string and write to LSB of the pixel's bytes
-                    for (int k = 0; k < maskedPixel.Length; k++)
-                    {
+                    for (int k = 0; k < maskedPixel.Length; k++) {
                         //If we have read an entire character from the text (taken 8 bits, assuming ASCII), 
                         //then we can move to the next character
-                        if (currentCharFromTextBinaryString == string.Empty)
-                        {
+                        if (currentCharFromTextBinaryString == string.Empty) {
                             //Since at this point we've read an entire character- if we have read all text 
                             // then we have also written a '\0' to the image (to indicate complete end of hidden text)
-                            if (charIndexInText == text.Length)
-                            {
-                                if (k > 0)
-                                {
+                            if (charIndexInText == text.Length) {
+                                if (k > 0) {
                                     //In case we have changed only some of the bits while writing '\0', we need to make sure they will be written
                                     imageBitmap.SetPixel(j, i, ColorFromByteArray(maskedPixel));
                                 }
@@ -130,29 +113,23 @@ namespace steganography
             return imageBitmap;
         }
 
-        public static string DecodeTextFromImage(Bitmap imageBitmap)
-        {
+        public static string DecodeTextFromImage(Bitmap imageBitmap) {
             int numBitsPerChar = 16;
 
             string decodedText = string.Empty;
             string decodedBinaryString = string.Empty;
 
             //Go over each pixel in the image
-            for (int i = 0; i < imageBitmap.Height; i++)
-            {
-                for (int j = 0; j < imageBitmap.Width; j++)
-                {
+            for (int i = 0; i < imageBitmap.Height; i++) {
+                for (int j = 0; j < imageBitmap.Width; j++) {
                     byte[] pixel = ByteArrayFromColor(imageBitmap.GetPixel(j, i));
 
                     //For each pixel we need to read 3 bits from the text string and write to LSB of the pixels
-                    foreach (byte b in pixel)
-                    {
-                        if (decodedBinaryString.Length == numBitsPerChar) /*Found a complete char */
-                        {
+                    foreach (byte b in pixel) {
+                        if (decodedBinaryString.Length == numBitsPerChar) /*Found a complete char */ {
                             //Convert the collected bits to a char
                             char decodedChar = Convert.ToChar(Convert.ToInt32(decodedBinaryString, 2));
-                            if (decodedChar == '\0')
-                            {
+                            if (decodedChar == '\0') {
                                 //Found the trailing zeros that indicate end of text
                                 return decodedText; //no need to push this character (string does it itself)
                             }
