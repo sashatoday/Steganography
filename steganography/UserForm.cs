@@ -15,7 +15,7 @@ namespace steganography {
 
         private Image originalImage;
         private Image encodedImage;
-        string encryptionKey = "";
+        byte[] encryptionKey;
 
         public UserForm() {
             InitializeComponent();
@@ -24,6 +24,21 @@ namespace steganography {
 
         #region Help, About, Exit, Reset events
 
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
+            HelpForm helpForm;
+            (helpForm = new HelpForm()).CreateControl();
+            helpForm.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            AboutProgramForm aboutProgramForm;
+            (aboutProgramForm = new AboutProgramForm()).CreateControl();
+            aboutProgramForm.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
 
         private void buttonReset_Click(object sender, EventArgs e) {
             buttonEncodeDecode.Enabled = false;
@@ -97,31 +112,29 @@ namespace steganography {
             } else return false;
         }
 
-        private string encryptText(string text, string key) {
+        private string encryptText(string text, byte[] key) {
             if (radioButtonAES.Checked) return AES.Encrypt(text, key);
             else return TripleDES.Encrypt(text, key);
         }
 
-        private string decryptText(string text, string key) {
+        private string decryptText(string text, byte[] key) {
             if (radioButtonAES.Checked) return AES.Decrypt(text, key);
             else return TripleDES.Decrypt(text, key);
         }
 
-        private string computeHashKey(string keyData) {
+        private byte[] computeHashKey(string keyData) {
             byte[] keyBytes = Encoding.ASCII.GetBytes(textBoxEncryptionKey.Text);
             HashAlgorithm hashAlgorithm;
-            byte[] resultKey;
             if (comboBoxHashAlgorithm.Text == "SHA-256") {
                 hashAlgorithm = new SHA256CryptoServiceProvider();
-                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+                return hashAlgorithm.ComputeHash(keyBytes);
             } else if (comboBoxHashAlgorithm.Text == "SHA-512") {
                 hashAlgorithm = new SHA512CryptoServiceProvider();
-                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+                return hashAlgorithm.ComputeHash(keyBytes);
             } else {
                 hashAlgorithm = new MD5CryptoServiceProvider();
-                resultKey = hashAlgorithm.ComputeHash(keyBytes);
+                return hashAlgorithm.ComputeHash(keyBytes);
             }
-            return encryptionKey = BitConverter.ToString(resultKey);
         }
 
         #endregion
@@ -140,14 +153,19 @@ namespace steganography {
         private void buttonEncodeDecode_Click(object sender, EventArgs e) {
             string imageFileName = textBoxImagePath.Text;
             string encryptedData = "";
+            string key = textBoxEncryptionKey.Text;
 
             if (string.IsNullOrWhiteSpace(imageFileName)) {
                 MessageBox.Show(this, "Choose an image file name!", "Error");
                 buttonEncodeDecode.Enabled = false;
                 return;
             }
+            if (string.IsNullOrWhiteSpace(key)) {
+                MessageBox.Show(this, "Write a key to encrypt text!", "Error");
+                return;
+            }
 
-            computeHashKey(textBoxEncryptionKey.Text);
+            encryptionKey = computeHashKey(key);
 
             if (radioButtonEncoding.Checked) {
                 string textData = richTextBoxTextData.Text;
@@ -202,21 +220,5 @@ namespace steganography {
         }
 
         #endregion
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
-            HelpForm helpForm;
-            (helpForm = new HelpForm()).CreateControl();
-            helpForm.ShowDialog();
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            AboutProgramForm aboutProgramForm;
-            (aboutProgramForm = new AboutProgramForm()).CreateControl();
-            aboutProgramForm.ShowDialog();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
-        }
     }
 }

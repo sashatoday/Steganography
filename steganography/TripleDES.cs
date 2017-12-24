@@ -4,30 +4,33 @@ using System.Text;
 
 namespace steganography {
     class TripleDES {
-        public static string Encrypt(string source, string key) {
-            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
-            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
-            byte[] byteHash;
-            byte[] byteBuff;
-            byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
-            desCryptoProvider.Key = byteHash;
-            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
-            byteBuff = Encoding.UTF8.GetBytes(source);
-            string encoded = Convert.ToBase64String(desCryptoProvider.CreateEncryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-            return encoded;
+
+        public static string Encrypt(string textData, byte[] key) {
+            byte[] textDataBytes = UTF8Encoding.UTF8.GetBytes(textData);
+            MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+            key = hashmd5.ComputeHash(key);
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = key;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
+            ICryptoTransform cTransform = tdes.CreateEncryptor();
+            byte[] encryptedDataBytes = cTransform.TransformFinalBlock(textDataBytes, 0, textDataBytes.Length);
+            tdes.Clear();
+            return Convert.ToBase64String(encryptedDataBytes, 0, encryptedDataBytes.Length);
         }
 
-        public static string Decrypt(string encodedText, string key) {
-            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
-            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
-            byte[] byteHash;
-            byte[] byteBuff;
-            byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
-            desCryptoProvider.Key = byteHash;
-            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
-            byteBuff = Convert.FromBase64String(encodedText);
-            string plaintext = Encoding.UTF8.GetString(desCryptoProvider.CreateDecryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-            return plaintext;
+        public static string Decrypt(string encryptedData, byte[] key) {
+            byte[] encryptedDataBytes = Convert.FromBase64String(encryptedData);
+            MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+            key = hashmd5.ComputeHash(key);
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = key;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
+            ICryptoTransform cTransform = tdes.CreateDecryptor();
+            byte[] textDataBytes = cTransform.TransformFinalBlock(encryptedDataBytes, 0, encryptedDataBytes.Length);
+            tdes.Clear();
+            return UTF8Encoding.UTF8.GetString(textDataBytes);
         }
     }
 }
