@@ -63,6 +63,16 @@ namespace steganography.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bg_lightl_903 {
+            get {
+                object obj = ResourceManager.GetObject("bg-lightl-903", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Black {
             get {
                 object obj = ResourceManager.GetObject("Black", resourceCulture);

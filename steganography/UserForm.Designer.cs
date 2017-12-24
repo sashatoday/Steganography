@@ -48,8 +48,8 @@
             this.radioButton3DES = new System.Windows.Forms.RadioButton();
             this.labelHashAlgorithm = new System.Windows.Forms.Label();
             this.comboBoxHashAlgorithm = new System.Windows.Forms.ComboBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,8 +57,8 @@
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
             this.groupBoxStep1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxEnDecSteps
@@ -67,7 +67,7 @@
             this.groupBoxEnDecSteps.Controls.Add(this.radioButtonEncoding);
             this.groupBoxEnDecSteps.Controls.Add(this.groupBoxStep2);
             this.groupBoxEnDecSteps.Controls.Add(this.groupBoxStep1);
-            this.groupBoxEnDecSteps.Location = new System.Drawing.Point(25, 57);
+            this.groupBoxEnDecSteps.Location = new System.Drawing.Point(25, 65);
             this.groupBoxEnDecSteps.Name = "groupBoxEnDecSteps";
             this.groupBoxEnDecSteps.Size = new System.Drawing.Size(339, 187);
             this.groupBoxEnDecSteps.TabIndex = 0;
@@ -149,7 +149,7 @@
             // 
             // richTextBoxTextData
             // 
-            this.richTextBoxTextData.Location = new System.Drawing.Point(25, 279);
+            this.richTextBoxTextData.Location = new System.Drawing.Point(25, 287);
             this.richTextBoxTextData.Name = "richTextBoxTextData";
             this.richTextBoxTextData.Size = new System.Drawing.Size(339, 170);
             this.richTextBoxTextData.TabIndex = 2;
@@ -158,7 +158,7 @@
             // labelMessageState
             // 
             this.labelMessageState.AutoSize = true;
-            this.labelMessageState.Location = new System.Drawing.Point(28, 259);
+            this.labelMessageState.Location = new System.Drawing.Point(28, 267);
             this.labelMessageState.Name = "labelMessageState";
             this.labelMessageState.Size = new System.Drawing.Size(86, 13);
             this.labelMessageState.TabIndex = 3;
@@ -167,7 +167,7 @@
             // labelLoadedImage
             // 
             this.labelLoadedImage.AutoEllipsis = true;
-            this.labelLoadedImage.Location = new System.Drawing.Point(386, 66);
+            this.labelLoadedImage.Location = new System.Drawing.Point(386, 74);
             this.labelLoadedImage.Name = "labelLoadedImage";
             this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
             this.labelLoadedImage.TabIndex = 4;
@@ -175,7 +175,7 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(25, 28);
+            this.buttonReset.Location = new System.Drawing.Point(25, 40);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 9;
@@ -185,7 +185,7 @@
             // 
             // textBoxEncryptionKey
             // 
-            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 503);
+            this.textBoxEncryptionKey.Location = new System.Drawing.Point(150, 511);
             this.textBoxEncryptionKey.Name = "textBoxEncryptionKey";
             this.textBoxEncryptionKey.Size = new System.Drawing.Size(214, 20);
             this.textBoxEncryptionKey.TabIndex = 10;
@@ -193,7 +193,7 @@
             // labelEncryptionKey
             // 
             this.labelEncryptionKey.AutoSize = true;
-            this.labelEncryptionKey.Location = new System.Drawing.Point(23, 506);
+            this.labelEncryptionKey.Location = new System.Drawing.Point(23, 514);
             this.labelEncryptionKey.Name = "labelEncryptionKey";
             this.labelEncryptionKey.Size = new System.Drawing.Size(122, 13);
             this.labelEncryptionKey.TabIndex = 11;
@@ -202,7 +202,7 @@
             // labelTextAlgorithm
             // 
             this.labelTextAlgorithm.AutoSize = true;
-            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 474);
+            this.labelTextAlgorithm.Location = new System.Drawing.Point(22, 482);
             this.labelTextAlgorithm.Name = "labelTextAlgorithm";
             this.labelTextAlgorithm.Size = new System.Drawing.Size(182, 13);
             this.labelTextAlgorithm.TabIndex = 12;
@@ -212,7 +212,7 @@
             // 
             this.radioButtonAES.AutoSize = true;
             this.radioButtonAES.Checked = true;
-            this.radioButtonAES.Location = new System.Drawing.Point(210, 472);
+            this.radioButtonAES.Location = new System.Drawing.Point(210, 480);
             this.radioButtonAES.Name = "radioButtonAES";
             this.radioButtonAES.Size = new System.Drawing.Size(46, 17);
             this.radioButtonAES.TabIndex = 13;
@@ -223,7 +223,7 @@
             // radioButton3DES
             // 
             this.radioButton3DES.AutoSize = true;
-            this.radioButton3DES.Location = new System.Drawing.Point(273, 472);
+            this.radioButton3DES.Location = new System.Drawing.Point(273, 480);
             this.radioButton3DES.Name = "radioButton3DES";
             this.radioButton3DES.Size = new System.Drawing.Size(53, 17);
             this.radioButton3DES.TabIndex = 14;
@@ -233,7 +233,7 @@
             // labelHashAlgorithm
             // 
             this.labelHashAlgorithm.AutoSize = true;
-            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 537);
+            this.labelHashAlgorithm.Location = new System.Drawing.Point(23, 545);
             this.labelHashAlgorithm.Name = "labelHashAlgorithm";
             this.labelHashAlgorithm.Size = new System.Drawing.Size(77, 13);
             this.labelHashAlgorithm.TabIndex = 15;
@@ -246,43 +246,42 @@
             "SHA-256",
             "SHA-512",
             "MD5"});
-            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 534);
+            this.comboBoxHashAlgorithm.Location = new System.Drawing.Point(127, 542);
             this.comboBoxHashAlgorithm.Name = "comboBoxHashAlgorithm";
             this.comboBoxHashAlgorithm.Size = new System.Drawing.Size(121, 21);
             this.comboBoxHashAlgorithm.TabIndex = 16;
             this.comboBoxHashAlgorithm.Text = "SHA-256";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(984, 26);
-            this.menuStrip1.TabIndex = 17;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // pictureBoxImage
             // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(389, 96);
+            this.pictureBoxImage.Location = new System.Drawing.Point(389, 104);
             this.pictureBoxImage.Name = "pictureBoxImage";
             this.pictureBoxImage.Size = new System.Drawing.Size(583, 410);
             this.pictureBoxImage.TabIndex = 5;
             this.pictureBoxImage.TabStop = false;
             // 
+            // menuStrip
+            // 
+            this.menuStrip.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip.TabIndex = 17;
+            this.menuStrip.Text = "menuStrip1";
+            // 
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.menuToolStripMenuItem.BackgroundImage = global::steganography.Properties.Resources.Без_названия;
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.menuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.menuToolStripMenuItem.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Padding = new System.Windows.Forms.Padding(6, 0, 6, 3);
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(54, 22);
+            this.menuToolStripMenuItem.Padding = new System.Windows.Forms.Padding(20, 0, 4, 0);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
             // helpToolStripMenuItem
@@ -290,7 +289,6 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -310,7 +308,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 576);
+            this.ClientSize = new System.Drawing.Size(984, 581);
             this.Controls.Add(this.comboBoxHashAlgorithm);
             this.Controls.Add(this.labelHashAlgorithm);
             this.Controls.Add(this.radioButton3DES);
@@ -324,8 +322,10 @@
             this.Controls.Add(this.labelMessageState);
             this.Controls.Add(this.richTextBoxTextData);
             this.Controls.Add(this.groupBoxEnDecSteps);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(100, 0);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "UserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text Encryption by Image Steganography";
@@ -334,9 +334,9 @@
             this.groupBoxStep2.ResumeLayout(false);
             this.groupBoxStep1.ResumeLayout(false);
             this.groupBoxStep1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,7 +364,7 @@
         private System.Windows.Forms.RadioButton radioButton3DES;
         private System.Windows.Forms.Label labelHashAlgorithm;
         private System.Windows.Forms.ComboBox comboBoxHashAlgorithm;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;

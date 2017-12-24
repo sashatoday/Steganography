@@ -24,21 +24,6 @@ namespace steganography {
 
         #region Help, About, Exit, Reset events
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            AboutProgramForm aboutProgramForm;
-            (aboutProgramForm = new AboutProgramForm()).CreateControl();
-            aboutProgramForm.ShowDialog();
-        }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
-            HelpForm helpForm;
-            (helpForm = new HelpForm()).CreateControl();
-            helpForm.ShowDialog();
-        }
 
         private void buttonReset_Click(object sender, EventArgs e) {
             buttonEncodeDecode.Enabled = false;
@@ -217,5 +202,21 @@ namespace steganography {
         }
 
         #endregion
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
+            HelpForm helpForm;
+            (helpForm = new HelpForm()).CreateControl();
+            helpForm.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            AboutProgramForm aboutProgramForm;
+            (aboutProgramForm = new AboutProgramForm()).CreateControl();
+            aboutProgramForm.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 }
