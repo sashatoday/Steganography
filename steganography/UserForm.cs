@@ -15,7 +15,8 @@ namespace steganography {
 
         private Image originalImage;
         private Image encodedImage;
-        byte[] encryptionKey;
+        private byte[] encryptionKey;
+        private string currentDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         public UserForm() {
             InitializeComponent();
@@ -77,13 +78,16 @@ namespace steganography {
 
         private string chooseImageFile() {
             OpenFileDialog openFileDialog = new OpenFileDialog {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                InitialDirectory = currentDirectoryPath,
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
                 FilterIndex = 1,
                 RestoreDirectory = true
             };
-            var result = openFileDialog.ShowDialog();
-            return result == DialogResult.OK ? openFileDialog.FileName : null;
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                currentDirectoryPath = Path.GetDirectoryName(openFileDialog.FileName);
+                return openFileDialog.FileName;
+            } else
+                return null;
         }
 
         private bool loadImage(string imageFileName) {
@@ -102,12 +106,13 @@ namespace steganography {
 
         private bool saveImage(string imageFileName) {
             var saveFileDialog = new SaveFileDialog {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                InitialDirectory = currentDirectoryPath,
                 Filter = "Image Files(*.BMP;*.JPG;*PNG;*.GIF)|*.BMP;*.JPG;*PNG;*.GIF",
                 FileName = Path.GetFileNameWithoutExtension(imageFileName) + "_encoded.bmp"
             };
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 encodedImage.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+                currentDirectoryPath = Path.GetDirectoryName(saveFileDialog.FileName);
                 return true;
             } else return false;
         }
