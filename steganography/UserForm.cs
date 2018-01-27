@@ -45,6 +45,7 @@ namespace steganography {
             buttonEncodeDecode.Enabled = false;
             richTextBoxTextData.Clear();
             labelLoadedImage.Text = "No image";
+            labelImageFileSize.Text = "";
             textBoxImagePath.Clear();
             textBoxEncryptionKey.Clear();
             pictureBoxImage.Image = null;
@@ -76,6 +77,25 @@ namespace steganography {
 
         #region Extra private functions
 
+        private string getAppropriateSize(double size) {
+            if (size < 1024) {
+                return String.Format("{0:0.##} bytes", size);
+            } else {
+                size /= 1024;
+                if (size < 1024) {
+                    return String.Format("{0:0.##} Kb", size);
+                } else {
+                    size /= 1024;
+                    if (size < 1024) {
+                        return String.Format("{0:0.##} Mb", size);
+                    } else {
+                        return String.Format("{0:0.##} Gb", size);
+                    }
+
+                }
+            }
+        }
+
         private string chooseImageFile() {
             OpenFileDialog openFileDialog = new OpenFileDialog {
                 InitialDirectory = currentDirectoryPath,
@@ -90,7 +110,7 @@ namespace steganography {
                 return null;
         }
 
-        private bool loadImage(string imageFileName) {
+        private long loadImage(string imageFileName) {
             try {
                 originalImage = Image.FromFile(imageFileName);
                 pictureBoxImage.Image =
@@ -99,9 +119,9 @@ namespace steganography {
                 MessageBox.Show("Failed to load image from file!" + Environment.NewLine +
                     Environment.NewLine + "Exception: " + exception.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return -1;
             }
-            return true;
+            return new FileInfo(imageFileName).Length;
         }
 
         private bool saveImage(string imageFileName) {
@@ -147,12 +167,17 @@ namespace steganography {
         #region Encode/decode steps events
 
         private void buttonBrowse_Click(object sender, EventArgs e) {
+            long imageSize;
             string imageFileName = chooseImageFile();
+
             textBoxImagePath.Text = imageFileName;
             if (string.IsNullOrWhiteSpace(imageFileName)) return;
-            if (!loadImage(imageFileName)) return;
+            imageSize = loadImage(imageFileName);
+            if (imageSize == -1) return;
+
             buttonEncodeDecode.Enabled = true;
             labelLoadedImage.Text = "Loaded image: " + Path.GetFileName(imageFileName);
+            labelImageFileSize.Text = "Size: " + getAppropriateSize(imageSize);
         }
 
         private void buttonEncodeDecode_Click(object sender, EventArgs e) {

@@ -54,6 +54,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelImageFileSize = new System.Windows.Forms.Label();
             this.groupBoxEnDecSteps.SuspendLayout();
             this.groupBoxStep2.SuspendLayout();
             this.groupBoxStep1.SuspendLayout();
@@ -169,7 +170,7 @@
             this.labelLoadedImage.AutoEllipsis = true;
             this.labelLoadedImage.Location = new System.Drawing.Point(386, 74);
             this.labelLoadedImage.Name = "labelLoadedImage";
-            this.labelLoadedImage.Size = new System.Drawing.Size(500, 13);
+            this.labelLoadedImage.Size = new System.Drawing.Size(586, 13);
             this.labelLoadedImage.TabIndex = 4;
             this.labelLoadedImage.Text = "No image";
             // 
@@ -254,7 +255,7 @@
             // 
             // pictureBoxImage
             // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(389, 104);
+            this.pictureBoxImage.Location = new System.Drawing.Point(389, 118);
             this.pictureBoxImage.Name = "pictureBoxImage";
             this.pictureBoxImage.Size = new System.Drawing.Size(583, 410);
             this.pictureBoxImage.TabIndex = 5;
@@ -267,7 +268,7 @@
             this.menuToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip.Size = new System.Drawing.Size(996, 24);
             this.menuStrip.TabIndex = 17;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -287,28 +288,37 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // labelImageFileSize
+            // 
+            this.labelImageFileSize.AutoSize = true;
+            this.labelImageFileSize.Location = new System.Drawing.Point(386, 93);
+            this.labelImageFileSize.Name = "labelImageFileSize";
+            this.labelImageFileSize.Size = new System.Drawing.Size(0, 13);
+            this.labelImageFileSize.TabIndex = 18;
             // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 581);
+            this.ClientSize = new System.Drawing.Size(996, 581);
+            this.Controls.Add(this.labelImageFileSize);
             this.Controls.Add(this.comboBoxHashAlgorithm);
             this.Controls.Add(this.labelHashAlgorithm);
             this.Controls.Add(this.radioButton3DES);
@@ -369,6 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label labelImageFileSize;
     }
 }
 
